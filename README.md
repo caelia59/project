@@ -36,3 +36,16 @@
 - `task7.c`
 - `task8.c`
 - `task9.c`
+
+## Verified firmware (2026-09-05 update)
+All tasks below were compiled and flashed onto the STM32-A90 car and verified on hardware:
+- `code/firmware/task2.bin` - Task 2 seven-segment display
+- `code/firmware/task3.bin` - Task 3 L298N motor reversal
+- `code/firmware/task4.bin` - Task 4 RPR220 sensor test
+- `code/firmware/task6.bin` - Task 6 button start/stop
+- `code/firmware/line_follow_final.bin` - Tasks 7/8/9 final line-following firmware (PID + lost-line recovery)
+
+Tasks 7, 8 and 9 share the same final firmware (`task7_project`, `task8_project`, `task9_project`):
+- Task 7: basic line following with differential steering
+- Task 8: S-curve following (lost-line recovery pivots back to the track)
+- Task 9: PID control (Kp=120, Kd=2.0) to reduce wobble and follow the line smoothly
