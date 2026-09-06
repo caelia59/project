@@ -1,51 +1,49 @@
-# project
-## Hardware
-- STM32F103C8T6
-- STM32 小车扩展板
+# RoboMaster 暑期项目
+
+## 硬件
+
+- STM32F103C8T6（STM32-A90 小车）
 - L298N 电机驱动模块
 - 两个直流减速电机
-- RPR220 循迹模块
-- 7 位数码管
-- 18650 电池及电源模块
-## Progress
-### Task 1
-创建 GitHub 仓库并使用 Git 管理项目。
-### Task 2
-控制扩展板上的数码管，从 0 开始每秒加 1，到 9 后重新回到 0。
-### Task 3
-使用 L298N 驱动两个直流电机，并通过扩展板按键切换电机旋转方向。
-### Task 4
-读取循迹传感器状态，观察传感器在黑色和白色表面上的输出变化，并设计基础循迹逻辑。
-### Task 5
-完成小车组装。
-![Car](documents/Car_Is_Ready.png)
-### Task 6
-实现按键控制小车启动和停止。
-### Task 7
-实现基础黑线循迹控制。
-### Task 8
-在基础循迹上增加弯道和丢线后的方向恢复逻辑，用于尝试 S 形路线。
-### Task 9
-加入 PID 控制，根据循迹误差调整左右电机速度，减少小车循迹过程中的抖动。
-## Code
-主要代码位于 `code` 文件夹中：
-- `task2.c`
-- `task3.c`
-- `task4.c`
-- `task6.c`
-- `task7.c`
-- `task8.c`
-- `task9.c`
+- RPR220 循迹模块（两个）
+- 七段数码管
+- 18650 电池
 
-## Verified firmware (2026-09-05 update)
-All tasks below were compiled and flashed onto the STM32-A90 car and verified on hardware:
-- `code/firmware/task2.bin` - Task 2 seven-segment display
-- `code/firmware/task3.bin` - Task 3 L298N motor reversal
-- `code/firmware/task4.bin` - Task 4 RPR220 sensor test
-- `code/firmware/task6.bin` - Task 6 button start/stop
-- `code/firmware/line_follow_final.bin` - Tasks 7/8/9 final line-following firmware (PID + lost-line recovery)
+## 任务进度
 
-Tasks 7, 8 and 9 share the same final firmware (`task7_project`, `task8_project`, `task9_project`):
-- Task 7: basic line following with differential steering
-- Task 8: S-curve following (lost-line recovery pivots back to the track)
-- Task 9: PID control (Kp=120, Kd=2.0) to reduce wobble and follow the line smoothly
+### Task 1：建仓库
+在 GitHub 创建本仓库，用 git 管理代码。
+
+### Task 2：数码管计数
+用 PA0-PA7 驱动七段数码管，从 0 开始每秒加 1，到 9 后回到 0，循环显示。
+代码在 code/task2_project/。
+
+### Task 3：电机控制
+用 PB6-PB9 控制 L298N 驱动两个电机正转，按一下扩展板按键电机反转，可以反复切换。
+代码在 code/task3_project/。
+
+### Task 4：循迹传感器测试
+读两个 RPR220 传感器（PB12/PB13），把两个传感器的状态组合成 0-3 显示在数码管上，观察传感器在黑色和白色上的输出变化。
+代码在 code/task4_project/。
+
+### Task 5：组装小车
+装好小车后拍照，放在 documents/Car_Is_Ready.png。
+
+### Task 6：按键启停
+按一下按键小车开始前进，再按一下停止。
+代码在 code/task6_project/。
+
+### Task 7/8/9：循迹
+- Task 7：双传感器循迹，小车沿黑线走
+- Task 8：走 S 弯等复杂线路
+- Task 9：加入 PID 控制，减小抖动，走得更稳
+
+最终版代码在 code/task9_project/，task7.c、task8.c 是中间版本的参考代码。
+
+## 代码目录
+
+- code/task2_project/  数码管
+- code/task3_project/  电机控制
+- code/task4_project/  传感器测试
+- code/task6_project/  按键启停
+- code/task9_project/  循迹最终版（PID）
